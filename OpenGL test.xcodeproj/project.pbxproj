@@ -12,6 +12,9 @@
 		3DBA23801E3E8C7C0038B1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBA237E1E3E8C7C0038B1BC /* Main.storyboard */; };
 		3DBA23821E3E8C7C0038B1BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBA23811E3E8C7C0038B1BC /* Assets.xcassets */; };
 		3DBA23851E3E8C7C0038B1BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBA23831E3E8C7C0038B1BC /* LaunchScreen.storyboard */; };
+		3DEC600E1E41962A003CD25D /* WidapGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC600D1E41962A003CD25D /* WidapGLView.swift */; };
+		3DEC60101E419655003CD25D /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC600F1E419655003CD25D /* ShaderProgram.swift */; };
+		3DEC60121E4198E1003CD25D /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC60111E4198E1003CD25D /* Vertex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		3DBA23811E3E8C7C0038B1BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DBA23841E3E8C7C0038B1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DBA23861E3E8C7C0038B1BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DEC600D1E41962A003CD25D /* WidapGLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidapGLView.swift; sourceTree = "<group>"; };
+		3DEC600F1E419655003CD25D /* ShaderProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
+		3DEC60111E4198E1003CD25D /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,9 @@
 				3DBA237A1E3E8C7B0038B1BC /* AppDelegate.swift */,
 				3DBA237C1E3E8C7B0038B1BC /* ViewController.swift */,
 				3DBA237E1E3E8C7C0038B1BC /* Main.storyboard */,
+				3DEC600D1E41962A003CD25D /* WidapGLView.swift */,
+				3DEC60111E4198E1003CD25D /* Vertex.swift */,
+				3DEC600F1E419655003CD25D /* ShaderProgram.swift */,
 				3DBA23811E3E8C7C0038B1BC /* Assets.xcassets */,
 				3DBA23831E3E8C7C0038B1BC /* LaunchScreen.storyboard */,
 				3DBA23861E3E8C7C0038B1BC /* Info.plist */,
@@ -137,6 +146,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DBA237D1E3E8C7B0038B1BC /* ViewController.swift in Sources */,
+				3DEC60101E419655003CD25D /* ShaderProgram.swift in Sources */,
+				3DEC600E1E41962A003CD25D /* WidapGLView.swift in Sources */,
+				3DEC60121E4198E1003CD25D /* Vertex.swift in Sources */,
 				3DBA237B1E3E8C7B0038B1BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +311,7 @@
 				3DBA238B1E3E8C7C0038B1BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
