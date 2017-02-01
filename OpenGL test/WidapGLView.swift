@@ -14,17 +14,39 @@ class WidapGLView: GLKView {
 	let vertShaderSrc = ""
 		+	"attribute vec4 pos; "
 		+	"attribute vec2 uv; "
-		+	"varying lowp vec4 fragColor;"
+		+	"varying lowp vec2 fragUV; "
 		+	"void main(void) { "
 		+		"gl_Position = pos; "
-		+		"fragColor = vec4(0.5, 0.0, 1.0, 1.0); "
+		//+		"fragColor = vec4(0.5, 0.0, 1.0, 1.0); "
+		+		"fragUV = uv; "
 		+	"} "
 	
+	/*
 	let fragShaderSrc = ""
-		+	"varying lowp vec4 fragColor;"
+		+	"varying lowp vec4 fragColor; "
+		+	"varying lowp vec2 fragUV; "
 		+	"void main(void) { "
 		+		"gl_FragColor = fragColor; "
 		+	"} "
+	*/
+	
+	let spinnerFragShaderSrc = ""
+		+	"varying lowp vec2 fragUV; "
+		+	"precision lowp float; "
+		+	"void main(void) { "
+		+		"float dstSq = fragUV.x*fragUV.x+fragUV.y*fragUV.y; "
+		+		"if (dstSq<0.9*0.9 && dstSq>0.7*0.7) { "
+		+			"float cycle = 0.33; "
+		+			"float ang = degrees(atan(fragUV.y, fragUV.x))/360.0; "
+		+			"gl_FragColor.r=mod(ang-cycle*1.0+0.5, 1.0); "
+		+			"gl_FragColor.b=mod(ang-cycle*2.0, 1.0); "
+		+			"gl_FragColor.g=mod(ang-cycle*3.0, 1.0); "
+		+			"gl_FragColor.a=1.0; "
+		+		"} "
+		+		"else { "
+		+			"gl_FragColor = vec4(0, 0, 0, 1); "
+		+		"} "
+		+	"}"
 	
 	let vertices : [Vertex] = [
 		Vertex( 0.0,  0.25, 0.0),    // TOP
@@ -52,7 +74,7 @@ class WidapGLView: GLKView {
 		self.context = EAGLContext(api: .openGLES2)
 		EAGLContext.setCurrent(self.context)
 		
-		var shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: fragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: spinnerFragShaderSrc)
 		
 		object = FullRect(shader: shader)
 		

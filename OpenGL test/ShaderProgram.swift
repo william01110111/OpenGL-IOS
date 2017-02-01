@@ -15,6 +15,10 @@ class ShaderProgram {
 	
 	init() {}
 	
+	deinit {
+		destroy()
+	}
+	
 	init(vertAttribs: [VertexAttribute], vert: String, frag: String) {
 		let vertexShaderName = self.compileShader(src: vert, type: GLenum(GL_VERTEX_SHADER))
 		let fragmentShaderName = self.compileShader(src: frag, type: GLenum(GL_FRAGMENT_SHADER))
@@ -28,6 +32,9 @@ class ShaderProgram {
 		}
 		
 		glLinkProgram(self.programHandle)
+		
+		glDeleteShader(vertexShaderName)
+		glDeleteShader(fragmentShaderName)
 		
 		var linkStatus : GLint = 0
 		glGetProgramiv(self.programHandle, GLenum(GL_LINK_STATUS), &linkStatus)
@@ -80,5 +87,13 @@ class ShaderProgram {
 	
 	func use() {
 		glUseProgram(programHandle)
+	}
+	
+	func destroy() {
+		
+		if programHandle > 0 {
+			glDeleteProgram(programHandle)
+			programHandle = 0
+		}
 	}
 }
