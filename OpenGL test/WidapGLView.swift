@@ -12,15 +12,19 @@ import GLKit
 class WidapGLView: GLKView {
 	
 	let vertShaderSrc = ""
-	+	"attribute vec4 a_Position; "
-	+	"void main(void) { "
-	+		"gl_Position = a_Position; "
-	+	"} "
+		+	"attribute vec4 pos; "
+		+	"attribute vec2 uv; "
+		+	"varying lowp vec4 fragColor;"
+		+	"void main(void) { "
+		+		"gl_Position = pos; "
+		+		"fragColor = vec4(0.5, 0.0, 1.0, 1.0); "
+		+	"} "
 	
 	let fragShaderSrc = ""
-	+	"void main(void) { "
-	+		"gl_FragColor = vec4(0, 1, 1, 1); "
-	+	"} "
+		+	"varying lowp vec4 fragColor;"
+		+	"void main(void) { "
+		+		"gl_FragColor = fragColor; "
+		+	"} "
 	
 	let vertices : [Vertex] = [
 		Vertex( 0.0,  0.25, 0.0),    // TOP
