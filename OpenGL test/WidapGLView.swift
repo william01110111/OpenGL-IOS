@@ -82,6 +82,8 @@ class WidapGLView: GLKView {
 		object = FullRect(shader: shader)
 		
 		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
+		
+		Delayer(seconds: 0.2, repeats: true, callback: {print("aaa")})
 	}
 	
 	override func draw(_ rect: CGRect) {
