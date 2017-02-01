@@ -48,7 +48,9 @@ class WidapGLView: GLKView {
 		self.context = EAGLContext(api: .openGLES2)
 		EAGLContext.setCurrent(self.context)
 		
-		object = FullRect(shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
+		var shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: fragShaderSrc)
+		
+		object = FullRect(shader: shader)
 		
 		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
 	}

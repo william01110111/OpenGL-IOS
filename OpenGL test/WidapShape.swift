@@ -28,7 +28,6 @@ class WidapShape {
 		let size =  MemoryLayout<Vertex>.size
 		glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, verts, GLenum(GL_STATIC_DRAW))
 		
-		
 		glGenBuffers(GLsizei(1), &indexBuffer)
 		glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
 		glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW))
@@ -40,22 +39,18 @@ class WidapShape {
 		
 		shader.use()
 		
-		glVertexAttribPointer(
-			VertexAttributes.pos.rawValue,
-			3,
-			GLenum(GL_FLOAT),
-			GLboolean(GL_FALSE),
-			GLsizei(MemoryLayout<Vertex>.size),
-			nil
-		)
-		
-		glEnableVertexAttribArray(VertexAttributes.pos.rawValue)
+		for i in VertexAttributes {
+			glVertexAttribPointer(i.index, i.count, i.type, GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), i.offset)
+			glEnableVertexAttribArray(i.index)
+		}
 		
 		glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
 		glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
 		
 		glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indexCount), GLenum(GL_UNSIGNED_BYTE), nil)
 		
-		glDisableVertexAttribArray(VertexAttributes.pos.rawValue)
+		for i in VertexAttributes {
+			glDisableVertexAttribArray(i.index)
+		}
 	}
 }

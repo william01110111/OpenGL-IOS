@@ -15,7 +15,7 @@ class ShaderProgram {
 	
 	init() {}
 	
-	init(vert: String, frag: String) {
+	init(vertAttribs: [VertexAttribute], vert: String, frag: String) {
 		let vertexShaderName = self.compileShader(src: vert, type: GLenum(GL_VERTEX_SHADER))
 		let fragmentShaderName = self.compileShader(src: frag, type: GLenum(GL_FRAGMENT_SHADER))
 		
@@ -23,7 +23,10 @@ class ShaderProgram {
 		glAttachShader(self.programHandle, vertexShaderName)
 		glAttachShader(self.programHandle, fragmentShaderName)
 		
-		glBindAttribLocation(self.programHandle, VertexAttributes.pos.rawValue, "pos")
+		for i in vertAttribs {
+			glBindAttribLocation(self.programHandle, i.index, i.name)
+		}
+		
 		glLinkProgram(self.programHandle)
 		
 		var linkStatus : GLint = 0

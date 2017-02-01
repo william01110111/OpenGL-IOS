@@ -9,9 +9,34 @@
 import Foundation
 import GLKit
 
+/*
 enum VertexAttributes : GLuint {
 	case pos = 0
 	case uv = 1
+}
+*/
+
+let VertexAttributes: [VertexAttribute] = [
+	VertexAttribute(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
+	VertexAttribute(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
+]
+
+class VertexAttribute {
+	
+	var name: String
+	var index: GLuint
+	var type: GLenum
+	var count: GLint
+	var offset: UnsafeRawPointer!
+	
+	init(name: String, index: GLuint, type: GLenum, count: GLint, offset: Int) {
+		
+		self.name = name
+		self.index = index
+		self.type = type
+		self.count = count
+		self.offset = UnsafeRawPointer(bitPattern: offset)
+	}
 }
 
 struct Vertex {
