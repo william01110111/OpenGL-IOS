@@ -31,12 +31,13 @@ class WidapGLView: GLKView {
 	*/
 	
 	let spinnerFragShaderSrc = ""
+		+	"uniform lowp float cycle; "
 		+	"varying lowp vec2 fragUV; "
 		+	"precision lowp float; "
 		+	"void main(void) { "
 		+		"float dstSq = fragUV.x*fragUV.x+fragUV.y*fragUV.y; "
 		+		"if (dstSq<0.9*0.9 && dstSq>0.7*0.7) { "
-		+			"float cycle = 0.33; "
+		//+			"float cycle = 0.33; "
 		+			"float ang = degrees(atan(fragUV.y, fragUV.x))/360.0; "
 		+			"gl_FragColor.r=mod(ang-cycle*1.0+0.5, 1.0); "
 		+			"gl_FragColor.b=mod(ang-cycle*2.0, 1.0); "
@@ -55,6 +56,8 @@ class WidapGLView: GLKView {
 	]
 	
 	fileprivate var object = WidapShape()
+	
+	var cycle = 0.0
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -83,12 +86,14 @@ class WidapGLView: GLKView {
 	
 	override func draw(_ rect: CGRect) {
 		
-		print("OpenGL spinner view drawn")
+		cycle += 0.1
 		
+		print("OpenGL spinner view drawn")
+		 
 		glClearColor(0.0, 0.0, 1.0, 0.5);
 		glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 		
-		object.draw()
+		object.draw(cycle: cycle)
 	}
 	
 	func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer {
