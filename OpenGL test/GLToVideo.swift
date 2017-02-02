@@ -1,15 +1,16 @@
 //
-//  SpinnerView.swift
+//  GLToVideo.swift
 //  OpenGL test
 //
 //  Created by William Wold on 2/2/17.
 //  Copyright © 2017 William Wold. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import GLKit
+import AVFoundation
 
-class SpinnerView: WidapGLView {
+class GLToVideo: WidapGLView {
 	
 	let vertShaderSrc = ""
 		+	"attribute vec4 pos; "
@@ -43,9 +44,13 @@ class SpinnerView: WidapGLView {
 		+			"gl_FragColor.g=1.0-mod(ang-cycle*2.0, 1.0); "
 		+			"gl_FragColor.b=1.0-mod(ang-cycle*3.0, 1.0); "
 		+			"gl_FragColor.a = 1.0; "
-		+		"} "
-		+		"else { "
-		+			"gl_FragColor = vec4(0, 0, 0, 0); "
+		+		"} else { "
+		+			"float maxDstSq = (sin(radians(cycle*360.0))+1.0)*0.2+0.1; "
+		+			"if (dstSq < maxDstSq * maxDstSq) {"
+		+				"gl_FragColor = vec4(0, 0, 0, 1); "
+		+			"} else { "
+		+				"gl_FragColor = vec4(0, 0, 0, 0); "
+		+			"} "
 		+		"} "
 		+	"}"
 	
@@ -78,6 +83,6 @@ class SpinnerView: WidapGLView {
 		
 		cycle.val += 0.01
 		
-		cycle.val = cycle.val - floor(cycle.val)
+		cycle.val = cycle.val - Float(Int(cycle.val))
 	}
 }
