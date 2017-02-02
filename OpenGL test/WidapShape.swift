@@ -40,11 +40,11 @@ class WidapShape {
 			indexCount = indices.count
 	}
 	
-	func draw(cycle: Double) {
+	func draw() {
 		
 		shader.use()
 		
-		glUniform1f(glGetUniformLocation(shader.programHandle, "cycle"), GLfloat(cycle))
+		//glUniform1f(glGetUniformLocation(shader.programHandle, "cycle"), GLfloat(cycle))
 		
 		glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
 		

@@ -57,7 +57,7 @@ class WidapGLView: GLKView {
 	
 	fileprivate var object = WidapShape()
 	
-	var cycle = 0.0
+	var cycle = UniformFloat(0.0)
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -84,6 +84,8 @@ class WidapGLView: GLKView {
 		
 		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: spinnerFragShaderSrc)
 		
+		shader.addUniform(uniform: cycle, name: "cycle")
+		
 		object = FullRect(shader: shader)
 		
 		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
@@ -93,7 +95,7 @@ class WidapGLView: GLKView {
 	
 	override func draw(_ rect: CGRect) {
 		
-		cycle += 0.01
+		cycle.val += 0.01
 		//cycle = 0.33
 		
 		//print("OpenGL spinner view drawn")
@@ -101,7 +103,7 @@ class WidapGLView: GLKView {
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 		
-		object.draw(cycle: cycle)
+		object.draw()
 	}
 	
 	func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer {

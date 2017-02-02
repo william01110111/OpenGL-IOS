@@ -12,6 +12,7 @@ import GLKit
 class ShaderProgram {
 	
 	var programHandle : GLuint = 0
+	var uniforms = [UniformBase?]()
 	
 	init() {}
 	
@@ -85,8 +86,32 @@ class ShaderProgram {
 		return shaderHandle
 	}
 	
+	func addUniform(uniform: UniformBase, name: String) {
+		
+		let loc = glGetUniformLocation(programHandle, name)
+		
+		if loc < 0 {
+			print("could not file uniform '"+name+"' in shader")
+			return
+		}
+		
+		//print("uniform '"+name+"' inserted at position \(loc)")
+		
+		while uniforms.count <= Int(loc) {
+			uniforms.append(nil)
+		}
+		
+		uniforms[Int(loc)] = uniform
+	}
+	
 	func use() {
+		
 		glUseProgram(programHandle)
+		
+		var i=0; while i < uniforms.count {
+			uniforms[i]?.apply(loc: GLint(i))
+			i+=1
+		}
 	}
 	
 	func destroy() {
