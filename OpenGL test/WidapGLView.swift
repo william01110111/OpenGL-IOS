@@ -39,13 +39,13 @@ class WidapGLView: GLKView {
 		+		"if (dstSq<0.9*0.9 && dstSq>0.7*0.7) { "
 		//+			"float cycle = 0.33; "
 		+			"float ang = degrees(atan(fragUV.y, fragUV.x))/360.0; "
-		+			"gl_FragColor.r=mod(ang-cycle*1.0+0.5, 1.0); "
-		+			"gl_FragColor.b=mod(ang-cycle*2.0, 1.0); "
-		+			"gl_FragColor.g=mod(ang-cycle*3.0, 1.0); "
-		+			"gl_FragColor.a=1.0; "
+		+			"gl_FragColor.r=1.0-mod(ang-cycle*1.0+0.5, 1.0); "
+		+			"gl_FragColor.g=1.0-mod(ang-cycle*2.0, 1.0); "
+		+			"gl_FragColor.b=1.0-mod(ang-cycle*3.0, 1.0); "
+		+			"gl_FragColor.a = 1.0; "
 		+		"} "
 		+		"else { "
-		+			"gl_FragColor = vec4(0, 0, 0, 1); "
+		+			"gl_FragColor = vec4(0, 0, 0, 0); "
 		+		"} "
 		+	"}"
 	
@@ -72,6 +72,11 @@ class WidapGLView: GLKView {
 	func setup() {
 		
 		backgroundColor = UIColor.clear
+		isOpaque = false
+		
+		enableSetNeedsDisplay = true
+		
+		backgroundColor = UIColor.clear
 		self.isOpaque = false
 		
 		self.context = EAGLContext(api: .openGLES2)
@@ -83,16 +88,17 @@ class WidapGLView: GLKView {
 		
 		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
 		
-		Delayer(seconds: 0.2, repeats: true, callback: {print("aaa")})
+		_ = Delayer(seconds: 0.02, repeats: true, callback: setNeedsDisplay)
 	}
 	
 	override func draw(_ rect: CGRect) {
 		
-		cycle += 0.1
+		cycle += 0.01
+		//cycle = 0.33
 		
-		print("OpenGL spinner view drawn")
-		 
-		glClearColor(0.0, 0.0, 1.0, 0.5);
+		//print("OpenGL spinner view drawn")
+		
+		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 		
 		object.draw(cycle: cycle)
