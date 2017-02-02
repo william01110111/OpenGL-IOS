@@ -9,7 +9,7 @@
 import Foundation
 import GLKit
 
-class WidapShape {
+class WidapShape: Drawable {
 	
 	var vertexBuffer : GLuint = 0
 	var indexBuffer: GLuint = 0

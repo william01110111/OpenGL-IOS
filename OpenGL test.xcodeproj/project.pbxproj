@@ -14,6 +14,7 @@
 		3DBA23821E3E8C7C0038B1BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBA23811E3E8C7C0038B1BC /* Assets.xcassets */; };
 		3DBA23851E3E8C7C0038B1BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBA23831E3E8C7C0038B1BC /* LaunchScreen.storyboard */; };
 		3DBB1F2A1E43B60B00804B54 /* UniformData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB1F291E43B60B00804B54 /* UniformData.swift */; };
+		3DBB1F2C1E43C49F00804B54 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB1F2B1E43C49F00804B54 /* SpinnerView.swift */; };
 		3DEC600E1E41962A003CD25D /* WidapGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC600D1E41962A003CD25D /* WidapGLView.swift */; };
 		3DEC60101E419655003CD25D /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC600F1E419655003CD25D /* ShaderProgram.swift */; };
 		3DEC60121E4198E1003CD25D /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC60111E4198E1003CD25D /* Vertex.swift */; };
@@ -31,6 +32,7 @@
 		3DBA23841E3E8C7C0038B1BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DBA23861E3E8C7C0038B1BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DBB1F291E43B60B00804B54 /* UniformData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniformData.swift; sourceTree = "<group>"; };
+		3DBB1F2B1E43C49F00804B54 /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		3DEC600D1E41962A003CD25D /* WidapGLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidapGLView.swift; sourceTree = "<group>"; };
 		3DEC600F1E419655003CD25D /* ShaderProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
 		3DEC60111E4198E1003CD25D /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				3DBA237C1E3E8C7B0038B1BC /* ViewController.swift */,
 				3DBA237E1E3E8C7C0038B1BC /* Main.storyboard */,
 				3DEC600D1E41962A003CD25D /* WidapGLView.swift */,
+				3DBB1F2B1E43C49F00804B54 /* SpinnerView.swift */,
 				3DEC60131E419C25003CD25D /* WidapShape.swift */,
 				3DBB1F291E43B60B00804B54 /* UniformData.swift */,
 				3D83AA461E427CA8001A0FD4 /* Delayer.swift */,
@@ -163,6 +166,7 @@
 				3DEC60101E419655003CD25D /* ShaderProgram.swift in Sources */,
 				3DEC600E1E41962A003CD25D /* WidapGLView.swift in Sources */,
 				3DBB1F2A1E43B60B00804B54 /* UniformData.swift in Sources */,
+				3DBB1F2C1E43C49F00804B54 /* SpinnerView.swift in Sources */,
 				3DEC60121E4198E1003CD25D /* Vertex.swift in Sources */,
 				3D83AA471E427CA8001A0FD4 /* Delayer.swift in Sources */,
 				3DBA237B1E3E8C7B0038B1BC /* AppDelegate.swift in Sources */,
