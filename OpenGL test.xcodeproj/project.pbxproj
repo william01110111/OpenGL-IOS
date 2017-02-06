@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D20CAB91E45A2FB008C677E /* TextRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20CAB81E45A2FB008C677E /* TextRender.swift */; };
 		3D83AA471E427CA8001A0FD4 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83AA461E427CA8001A0FD4 /* Delayer.swift */; };
 		3DBA237B1E3E8C7B0038B1BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA237A1E3E8C7B0038B1BC /* AppDelegate.swift */; };
 		3DBA237D1E3E8C7B0038B1BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA237C1E3E8C7B0038B1BC /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D20CAB81E45A2FB008C677E /* TextRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRender.swift; sourceTree = "<group>"; };
 		3D83AA461E427CA8001A0FD4 /* Delayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delayer.swift; sourceTree = "<group>"; };
 		3DBA23771E3E8C7B0038B1BC /* OpenGL test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGL test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBA237A1E3E8C7B0038B1BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				3DEC600D1E41962A003CD25D /* WidapGLView.swift */,
 				3DBB1F2D1E43D8E200804B54 /* GLToVideo.swift */,
 				3DBB1F2B1E43C49F00804B54 /* SpinnerView.swift */,
+				3D20CAB81E45A2FB008C677E /* TextRender.swift */,
 				3DEC60131E419C25003CD25D /* WidapShape.swift */,
 				3DBB1F291E43B60B00804B54 /* UniformData.swift */,
 				3D83AA461E427CA8001A0FD4 /* Delayer.swift */,
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D20CAB91E45A2FB008C677E /* TextRender.swift in Sources */,
 				3DBA237D1E3E8C7B0038B1BC /* ViewController.swift in Sources */,
 				3DEC60141E419C25003CD25D /* WidapShape.swift in Sources */,
 				3DEC60161E419C9A003CD25D /* FullRect.swift in Sources */,
