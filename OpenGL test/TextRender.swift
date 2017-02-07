@@ -107,6 +107,8 @@ class TextRender: WidapGLView {
 		
 		var tex: GLuint = 0
 		
+		glGenTextures(1, &tex)
+		
 		//glGenTextures(1, &tex)
 		
 		// upload to OpenGL
