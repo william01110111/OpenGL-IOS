@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D20CAB91E45A2FB008C677E /* TextRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20CAB81E45A2FB008C677E /* TextRender.swift */; };
 		3D83AA471E427CA8001A0FD4 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83AA461E427CA8001A0FD4 /* Delayer.swift */; };
+		3D8F30CA1E4BAA2600D15BE9 /* dungeon_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D8F30C91E4BAA2600D15BE9 /* dungeon_01.png */; };
 		3DBA237B1E3E8C7B0038B1BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA237A1E3E8C7B0038B1BC /* AppDelegate.swift */; };
 		3DBA237D1E3E8C7B0038B1BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA237C1E3E8C7B0038B1BC /* ViewController.swift */; };
 		3DBA23801E3E8C7C0038B1BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBA237E1E3E8C7C0038B1BC /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		3D20CAB81E45A2FB008C677E /* TextRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRender.swift; sourceTree = "<group>"; };
 		3D83AA461E427CA8001A0FD4 /* Delayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delayer.swift; sourceTree = "<group>"; };
+		3D8F30C91E4BAA2600D15BE9 /* dungeon_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dungeon_01.png; sourceTree = "<group>"; };
 		3DBA23771E3E8C7B0038B1BC /* OpenGL test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGL test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBA237A1E3E8C7B0038B1BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DBA237C1E3E8C7B0038B1BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				3DEC60151E419C9A003CD25D /* FullRect.swift */,
 				3DEC600F1E419655003CD25D /* ShaderProgram.swift */,
 				3DBA23811E3E8C7C0038B1BC /* Assets.xcassets */,
+				3D8F30C91E4BAA2600D15BE9 /* dungeon_01.png */,
 				3DBA23831E3E8C7C0038B1BC /* LaunchScreen.storyboard */,
 				3DBA23861E3E8C7C0038B1BC /* Info.plist */,
 			);
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DBA23851E3E8C7C0038B1BC /* LaunchScreen.storyboard in Resources */,
+				3D8F30CA1E4BAA2600D15BE9 /* dungeon_01.png in Resources */,
 				3DBA23821E3E8C7C0038B1BC /* Assets.xcassets in Resources */,
 				3DBA23801E3E8C7C0038B1BC /* Main.storyboard in Resources */,
 			);

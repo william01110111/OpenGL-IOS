@@ -51,11 +51,11 @@ class TextRender: WidapGLView {
 		+	"}"
 	
 	let FragShaderSrc = ""
-		+	"uniform sampler2D tex;"
+		+	"uniform sampler2D u_Texture;"
 		+	"varying lowp vec2 fragUV; "
 		+	"precision lowp float; "
 		+	"void main(void) { "
-		+		"gl_FragColor = vec4(texture2D(tex, vec2(0, 0)).rg, 0.1, 1.0); "
+		+		"gl_FragColor = vec4(texture2D(u_Texture, fragUV).rg, 0.2, 1.0); "
 		+	"}"
 	
 	let vertices : [Vertex] = [
@@ -100,6 +100,7 @@ class TextRender: WidapGLView {
 		let pixelBuffer = malloc(4 * width * height)
 		
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
+		print(colorSpace.numberOfComponents)
 		let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
 		guard let context = CGContext.init(data: pixelBuffer, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 4*width, space: colorSpace, bitmapInfo: UInt32(bitmapInfo.rawValue)) else {
 			// cannot create context - handle error
@@ -152,16 +153,18 @@ class TextRender: WidapGLView {
 		
 		let tex = UniformTex()
 		
-		glBindTexture(GLenum(GL_TEXTURE_2D), tex.texId)
+		//glBindTexture(GLenum(GL_TEXTURE_2D), tex.texId)
 		
 		//glGenTextures(1, &tex)
 		
 		// upload to OpenGL
-		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
+		//glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
 		//free(pixelBuffer);
 		
-		shader.addUniform(uniform: tex, name: "tex")
+		tex.texId = loadTexture("dungeon_01.png")
+		
+		shader.addUniform(uniform: tex, name: "u_Texture")
 	}
 	
 	override func update() {
@@ -169,5 +172,19 @@ class TextRender: WidapGLView {
 		cycle.val += 0.01
 		
 		cycle.val = cycle.val - floor(cycle.val)
+	}
+	
+	func loadTexture(_ filename: String) -> GLuint {
+		
+		let path = Bundle.main.path(forResource: filename, ofType: nil)!
+		let option = [ GLKTextureLoaderOriginBottomLeft: true]
+		do {
+			let info = try GLKTextureLoader.texture(withContentsOfFile: path, options: option as [String : NSNumber]?)
+			let tex = info.name
+			return tex
+		} catch {
+			print("texture loading failed")
+			return 0
+		}
 	}
 }
