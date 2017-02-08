@@ -51,3 +51,27 @@ class UniformVec3: UniformData<(GLfloat, GLfloat, GLfloat)> {
 		glUniform3f(loc, val.0, val.1, val.2)
 	}
 }
+
+class UniformTex: UniformBase {
+	
+	var texId: GLuint = 0
+	
+	override init() {
+		super.init()
+		glGenTextures(1, &texId)
+	}
+	
+	deinit {
+		glDeleteTextures(1, &texId)
+	}
+	
+	override func apply(loc: GLint) {
+		glActiveTexture(GLenum(GL_TEXTURE0))
+		glBindTexture(GLenum(GL_TEXTURE_2D), texId)
+		glUniform1i(loc, GLint(0))
+	}
+}
+
+
+
+

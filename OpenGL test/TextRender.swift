@@ -31,6 +31,7 @@ class TextRender: WidapGLView {
 	*/
 	
 	let spinnerFragShaderSrc = ""
+		+	"uniform sampler2D tex;"
 		+	"uniform lowp float cycle; "
 		+	"varying lowp vec2 fragUV; "
 		+	"precision lowp float; "
@@ -45,8 +46,16 @@ class TextRender: WidapGLView {
 		+			"gl_FragColor.a = 1.0; "
 		+		"} "
 		+		"else { "
-		+			"gl_FragColor = vec4(0, 0, 0, 0); "
+		+			"gl_FragColor = texture2D(tex, fragUV); "
 		+		"} "
+		+	"}"
+	
+	let FragShaderSrc = ""
+		+	"uniform sampler2D tex;"
+		+	"varying lowp vec2 fragUV; "
+		+	"precision lowp float; "
+		+	"void main(void) { "
+		+		"gl_FragColor = vec4(texture2D(tex, vec2(0, 0)).rg, 0.1, 1.0); "
 		+	"}"
 	
 	let vertices : [Vertex] = [
@@ -63,9 +72,9 @@ class TextRender: WidapGLView {
 		
 		super.setup()
 		
-		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: spinnerFragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: FragShaderSrc)
 		
-		shader.addUniform(uniform: cycle, name: "cycle")
+		//shader.addUniform(uniform: cycle, name: "cycle")
 		
 		object = FullRect(shader: shader)
 		
@@ -75,12 +84,15 @@ class TextRender: WidapGLView {
 		
 		//UIView *view = ... something ...;
 		
-		let view = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+		let view = UITextView(frame: CGRect(x: 0, y: 0, width: 220, height: 180))
 		
-		view.text = "hello, this is some text in a view"
+		view.text = "William W Wold"
+		view.textColor = UIColor(colorLiteralRed: 0.4, green: 0.9, blue: 0.1, alpha: 1.0)
+		view.font = UIFont(name: view.font!.fontName, size: 60)
+		view.backgroundColor = UIColor(colorLiteralRed: 0.1, green: 0.6, blue: 0.8, alpha: 1.0)
 		
 		// make space for an RGBA image of the view
-		//GLubyte *pixelBuffer = (GLubyte *)malloc(4 * view.bounds.size.width * view.bounds.size.height);
+		//GLubyte *pixelBuffer = (GLubyte *)malloc(4 * view.bounds.size.width * view.bounds.size.height);`
 		
 		let width: Int = Int(view.bounds.size.width)
 		let height: Int = Int(view.bounds.size.height)
@@ -105,16 +117,51 @@ class TextRender: WidapGLView {
 		
 		view.layer.render(in: context)
 		
-		var tex: GLuint = 0
+		/*
+		var y = height-1
 		
-		glGenTextures(1, &tex)
+		while (y>=3) {
+			
+			var x = 0
+			
+			while (x<width) {
+				
+				let val0 = (pixelBuffer?.assumingMemoryBound(to: UInt8.self)[(y*width+x)*4])!
+				let val1 = (pixelBuffer?.assumingMemoryBound(to: UInt8.self)[((y-3)*width+x)*4])!
+				
+				if (val0>128 && val1>128) {
+					print(":", terminator: "")
+				} else if (val0>128) {
+					print("'", terminator: "")
+				}
+				else if (val1>128) {
+					print(".", terminator: "")
+				}
+				else {
+					print(" ", terminator: "")
+				}
+				
+				x+=2
+			}
+			
+			print()
+			
+			y-=6
+		}
+		*/
+		
+		let tex = UniformTex()
+		
+		glBindTexture(GLenum(GL_TEXTURE_2D), tex.texId)
 		
 		//glGenTextures(1, &tex)
 		
 		// upload to OpenGL
-		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(view.bounds.size.width), GLsizei(view.bounds.size.height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
+		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
-		free(pixelBuffer);
+		//free(pixelBuffer);
+		
+		shader.addUniform(uniform: tex, name: "tex")
 	}
 	
 	override func update() {
