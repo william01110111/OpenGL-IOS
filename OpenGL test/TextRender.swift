@@ -153,16 +153,22 @@ class TextRender: WidapGLView {
 		
 		let tex = UniformTex()
 		
-		//glBindTexture(GLenum(GL_TEXTURE_2D), tex.texId)
+		glGenTextures(1, &tex.texId)
+		
+		glBindTexture(GLenum(GL_TEXTURE_2D), tex.texId)
+		
+		glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
+		glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
+		glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
 		
 		//glGenTextures(1, &tex)
 		
 		// upload to OpenGL
-		//glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
+		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
 		//free(pixelBuffer);
 		
-		tex.texId = loadTexture("dungeon_01.png")
+		//tex.texId = loadTexture("dungeon_01.png")
 		
 		shader.addUniform(uniform: tex, name: "u_Texture")
 	}
