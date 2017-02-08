@@ -13,10 +13,10 @@ class FullRect: WidapShape {
 	
 	let vertices : [Vertex] = [
 		//		Position			UV
-		Vertex(	1.0, -1.0, 0.0,		1.0, -1.0),
+		Vertex(	1.0, -1.0, 0.0,		1.0, 0.0),
 		Vertex(	1.0,  1.0, 0.0,		1.0, 1.0),
-		Vertex(	-1.0,  1.0, 0.0,	-1.0, 1.0),
-		Vertex(	-1.0, -1.0, 0.0,	-1.0, -1.0)
+		Vertex(	-1.0,  1.0, 0.0,	0.0, 1.0),
+		Vertex(	-1.0, -1.0, 0.0,	0.0, 0.0)
 	]
 	
 	let indices : [GLubyte] = [

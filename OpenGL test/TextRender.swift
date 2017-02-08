@@ -50,14 +50,6 @@ class TextRender: WidapGLView {
 		+		"} "
 		+	"}"
 	
-	let FragShaderSrc = ""
-		+	"uniform sampler2D u_Texture;"
-		+	"varying lowp vec2 fragUV; "
-		+	"precision lowp float; "
-		+	"void main(void) { "
-		+		"gl_FragColor = vec4(texture2D(u_Texture, fragUV).rg, 0.2, 1.0); "
-		+	"}"
-	
 	let vertices : [Vertex] = [
 		Vertex( 0.0,  0.25, 0.0),    // TOP
 		Vertex(-0.5, -0.25, 0.0),    // LEFT
@@ -72,19 +64,25 @@ class TextRender: WidapGLView {
 		
 		super.setup()
 		
-		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: FragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: spinnerFragShaderSrc)
 		
-		//shader.addUniform(uniform: cycle, name: "cycle")
+		 shader.addUniform(uniform: cycle, name: "cycle")
 		
 		object = FullRect(shader: shader)
 		
 		drawables.append(object)
 		
+		let textShape = TextShape()
+		
+		textShape.text = "this is a test"
+		
+		drawables.append(textShape)
+		
 		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
 		
 		//UIView *view = ... something ...;
 		
-		let view = UITextView(frame: CGRect(x: 0, y: 0, width: 220, height: 180))
+		/*let view = UITextView(frame: CGRect(x: 0, y: 0, width: 220, height: 180))
 		
 		view.text = "William W Wold"
 		view.textColor = UIColor(colorLiteralRed: 0.4, green: 0.9, blue: 0.1, alpha: 1.0)
@@ -170,7 +168,7 @@ class TextRender: WidapGLView {
 		
 		//tex.texId = loadTexture("dungeon_01.png")
 		
-		shader.addUniform(uniform: tex, name: "u_Texture")
+		shader.addUniform(uniform: tex, name: "tex")*/
 	}
 	
 	override func update() {
