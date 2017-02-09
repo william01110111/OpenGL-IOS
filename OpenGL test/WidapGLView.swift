@@ -35,6 +35,9 @@ class WidapGLView: GLKView {
 		self.context = EAGLContext(api: .openGLES2)
 		EAGLContext.setCurrent(self.context)
 		
+		glEnable(GLenum(GL_BLEND))
+		glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA))
+		
 		_ = Delayer(seconds: frameTime, repeats: true, callback: setNeedsDisplay)
 	}
 	

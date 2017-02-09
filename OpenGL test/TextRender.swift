@@ -31,7 +31,6 @@ class TextRender: WidapGLView {
 	*/
 	
 	let spinnerFragShaderSrc = ""
-		+	"uniform sampler2D tex;"
 		+	"uniform lowp float cycle; "
 		+	"varying lowp vec2 fragUV; "
 		+	"precision lowp float; "
@@ -46,7 +45,7 @@ class TextRender: WidapGLView {
 		+			"gl_FragColor.a = 1.0; "
 		+		"} "
 		+		"else { "
-		+			"gl_FragColor = texture2D(tex, fragUV); "
+		+			"gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); "
 		+		"} "
 		+	"}"
 	
@@ -66,7 +65,7 @@ class TextRender: WidapGLView {
 		
 		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: spinnerFragShaderSrc)
 		
-		 shader.addUniform(uniform: cycle, name: "cycle")
+		shader.addUniform(uniform: cycle, name: "cycle")
 		
 		object = FullRect(shader: shader)
 		

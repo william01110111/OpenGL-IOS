@@ -30,15 +30,17 @@ class TextShape: WidapShape {
 		+	"varying lowp vec2 fragUV; "
 		+	"precision lowp float; "
 		+	"void main(void) { "
-		+			"gl_FragColor = texture2D(tex, fragUV); "
+		+		"float val = texture2D(tex, vec2(fragUV.x, 1.0-fragUV.y)).r; "
+		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val); "
+		//+		"gl_FragColor = vec4(0.0, 0.0, 1.0, 0.5); "
 		+	"}"
 	
 	static let vertices : [Vertex] = [
 		//		Position			UV
-		Vertex(	1.0, -1.0, 0.0,		1.0, 0.0),
-		Vertex(	1.0,  1.0, 0.0,		1.0, 1.0),
-		Vertex(	-1.0,  1.0, 0.0,	0.0, 1.0),
-		Vertex(	-1.0, -1.0, 0.0,	0.0, 0.0)
+		Vertex(	1.0/2, -1.0/2, 0,		1.0, 0.0),
+		Vertex(	1.0/2,  1.0/2, 0,		1.0, 1.0),
+		Vertex(	-1.0/2,  1.0/2, 0,	0.0, 1.0),
+		Vertex(	-1.0/2, -1.0/2, 0,	0.0, 0.0)
 	]
 	
 	static let indices : [GLubyte] = [
@@ -79,12 +81,14 @@ class TextShape: WidapShape {
 		let width: Int = Int(view.bounds.size.width)
 		let height: Int = Int(view.bounds.size.height)
 		
-		let pixelBuffer = malloc(4 * width * height)
+		//let colorSpace = CGColorSpaceCreateDeviceRGB()
 		
-		let colorSpace = CGColorSpaceCreateDeviceRGB()
-		print(colorSpace.numberOfComponents)
+		let colorSpace = CGColorSpaceCreateDeviceGray()
+		
+		let pixelBuffer = malloc((colorSpace.numberOfComponents + 1) * width * height)
+		
 		let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-		guard let context = CGContext.init(data: pixelBuffer, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 4*width, space: colorSpace, bitmapInfo: UInt32(bitmapInfo.rawValue)) else {
+		guard let context = CGContext.init(data: pixelBuffer, width: width, height: height, bitsPerComponent: 8, bytesPerRow: (colorSpace.numberOfComponents + 1) * width, space: colorSpace, bitmapInfo: UInt32(bitmapInfo.rawValue)) else {
 			// cannot create context - handle error
 			print("context error or something")
 			return
@@ -144,7 +148,7 @@ class TextShape: WidapShape {
 		//glGenTextures(1, &tex)
 		
 		// upload to OpenGL
-		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
+		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_LUMINANCE_ALPHA, GLsizei(width), GLsizei(height), 0, GLenum(GL_LUMINANCE_ALPHA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
 		//free(pixelBuffer);
 	}
