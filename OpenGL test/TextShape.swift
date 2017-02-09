@@ -30,17 +30,16 @@ class TextShape: WidapShape {
 		+	"varying lowp vec2 fragUV; "
 		+	"precision lowp float; "
 		+	"void main(void) { "
-		+		"float val = texture2D(tex, vec2(fragUV.x, 1.0-fragUV.y)).r; "
+		+		"float val = texture2D(tex, fragUV).x; "
 		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val); "
-		//+		"gl_FragColor = vec4(0.0, 0.0, 1.0, 0.5); "
 		+	"}"
 	
 	static let vertices : [Vertex] = [
 		//		Position			UV
-		Vertex(	1.0/2, -1.0/2, 0,		1.0, 0.0),
-		Vertex(	1.0/2,  1.0/2, 0,		1.0, 1.0),
-		Vertex(	-1.0/2,  1.0/2, 0,	0.0, 1.0),
-		Vertex(	-1.0/2, -1.0/2, 0,	0.0, 0.0)
+		Vertex(	1.0, -1.0, 0,		1.0, 0.0),
+		Vertex(	1.0,  1.0, 0,		1.0, 1.0),
+		Vertex(	-1.0,  1.0, 0,	0.0, 1.0),
+		Vertex(	-1.0, -1.0, 0,	0.0, 0.0)
 	]
 	
 	static let indices : [GLubyte] = [
@@ -65,21 +64,53 @@ class TextShape: WidapShape {
 	}
 	
 	func updateText() {
-		print("text updating")
+		//let view = UITextView(frame: CGRect(x: 0, y: 0, width: 220, height: 180))
 		
-		let view = UITextView(frame: CGRect(x: 0, y: 0, width: 220, height: 180))
+		let layer = CATextLayer()
 		
-		view.text = text
-		view.textColor = UIColor.white
-		view.font = UIFont(name: view.font!.fontName, size: 60)
-		view.backgroundColor = UIColor.black
+		//layer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+		layer.string = text
+		layer.foregroundColor = UIColor.white.cgColor
+		layer.backgroundColor = UIColor.black.cgColor
+		layer.fontSize = 20
+		layer.isWrapped = false
+		
+		let preferredFrameSize = layer.preferredFrameSize()
+		print("preferred frame size: \(preferredFrameSize)")
+		
+		let width: Int = Int(ceil(preferredFrameSize.width/4))*4
+		let height: Int = Int(ceil(preferredFrameSize.height/4))*4
+		
+		//layer.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: layer.preferredFrameSize())
+		
+		layer.frame = CGRect(x: 0, y: 0, width: width, height: height)
+		
+		//layer.frame = CGRect(x: 0, y: 0, width: width, height: height)
+		
+		/*for familyName:String in UIFont.familyNames {
+			print("Family Name: \(familyName)")
+			for fontName:String in UIFont.fontNames(forFamilyName: familyName) {
+				print("--Font Name: \(fontName)")
+			}
+		}*/
+		
+		//let myFont = UIFont(name: "SnellRoundhand", size: 60)
+		
+		//let text: NSAttributedString = "hello"
+		
+		//let myFontSize = myFont.size
+		//	[YourTextHere sizeWithFont:myFont];
+		
+		//view.text = text
+		//view.textColor = UIColor.white
+		//view.font = UIFont(name: view.font!.fontName, size: 60)
+		//view.backgroundColor = UIColor.black
 		//UIColor(colorLiteralRed: 0.1, green: 0.6, blue: 0.8, alpha: 1.0)
 		
 		// make space for an RGBA image of the view
 		//GLubyte *pixelBuffer = (GLubyte *)malloc(4 * view.bounds.size.width * view.bounds.size.height);`
 		
-		let width: Int = Int(view.bounds.size.width)
-		let height: Int = Int(view.bounds.size.height)
+		print("width: \(width), height: \(height)")
 		
 		//let colorSpace = CGColorSpaceCreateDeviceRGB()
 		
@@ -102,7 +133,7 @@ class TextShape: WidapShape {
 		// draw the view to the buffer
 		//[view.layer renderInContext:context];
 		
-		view.layer.render(in: context)
+		layer.render(in: context)
 		
 		/*
 		var y = height-1
@@ -137,7 +168,7 @@ class TextShape: WidapShape {
 		}
 		*/
 		
-		glGenTextures(1, &tex.texId)
+		//glGenTextures(1, &tex.texId)
 		
 		glBindTexture(GLenum(GL_TEXTURE_2D), tex.texId)
 		
@@ -150,6 +181,6 @@ class TextShape: WidapShape {
 		// upload to OpenGL
 		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_LUMINANCE_ALPHA, GLsizei(width), GLsizei(height), 0, GLenum(GL_LUMINANCE_ALPHA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
-		//free(pixelBuffer);
+		free(pixelBuffer);
 	}
 }
