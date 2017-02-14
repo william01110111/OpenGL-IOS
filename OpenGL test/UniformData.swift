@@ -52,6 +52,21 @@ class UniformVec3: UniformData<(GLfloat, GLfloat, GLfloat)> {
 	}
 }
 
+class UniformMatrix4: UniformData<GLKMatrix4> {
+	
+	static func getPtr(input: GLKMatrix4) -> [Float] {
+		var out = [Float]();
+		for i in 0..<16 {
+			out.append(input[i])
+		}
+		return out
+	}
+	
+	override func apply(loc: GLint) {
+		glUniformMatrix4fv(loc, 1, GLboolean(GL_FALSE), UniformMatrix4.getPtr(input: val))
+	}
+}
+
 class UniformTex: UniformBase {
 	
 	var texId: GLuint = 0

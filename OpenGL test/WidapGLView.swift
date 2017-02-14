@@ -9,10 +9,11 @@
 import UIKit
 import GLKit
 
+@IBDesignable
 class WidapGLView: GLKView {
 	
-	var frameTime = 0.02
-	
+	var lastFrameTime: Double = 0
+	var displayLink: CADisplayLink!
 	var drawables = [Drawable]()
 	
 	override init(frame: CGRect) {
@@ -38,12 +39,26 @@ class WidapGLView: GLKView {
 		glEnable(GLenum(GL_BLEND))
 		glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA))
 		
-		_ = Delayer(seconds: frameTime, repeats: true, callback: setNeedsDisplay)
+		//_ = Delayer(seconds: frameTime, repeats: true, callback: setNeedsDisplay)
+		
+		displayLink = CADisplayLink(target: self, selector: #selector(displayRefreshed))
+		
+		displayLink.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+		lastFrameTime = displayLink.timestamp
 	}
 	
-	override func draw(_ rect: CGRect) {
+	func displayRefreshed() {
+		let deltaTime = displayLink.timestamp - lastFrameTime
+		lastFrameTime = displayLink.timestamp
 		
-		update()
+		update(delta: deltaTime)
+		
+		setNeedsDisplay()
+	}
+	
+	func update(delta: Double) {}
+	
+	override func draw(_ rect: CGRect) {
 		
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
@@ -52,8 +67,6 @@ class WidapGLView: GLKView {
 			i.draw()
 		}
 	}
-	
-	func update() {}
 	
 	func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer {
 		let ptr: UnsafeRawPointer? = nil

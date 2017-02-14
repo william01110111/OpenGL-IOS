@@ -9,6 +9,7 @@
 import UIKit
 import GLKit
 
+@IBDesignable
 class TextRender: WidapGLView {
 	
 	let vertShaderSrc = ""
@@ -49,6 +50,7 @@ class TextRender: WidapGLView {
 		+		"} "
 		+	"}"
 	
+	
 	let vertices : [Vertex] = [
 		Vertex( 0.0,  0.25, 0.0),    // TOP
 		Vertex(-0.5, -0.25, 0.0),    // LEFT
@@ -56,6 +58,13 @@ class TextRender: WidapGLView {
 	]
 	
 	fileprivate var object = WidapShape()
+	
+	@IBInspectable var cycleIB: Double = 0.0 {
+		didSet {
+			cycle.val = GLfloat(cycleIB/10)
+			setNeedsLayout()
+		}
+	}
 	
 	var cycle = UniformFloat(0.0)
 	
@@ -73,7 +82,7 @@ class TextRender: WidapGLView {
 		
 		let textShape = TextShape()
 		
-		textShape.text = "this is a test"
+		textShape.text = "William"
 		
 		drawables.append(textShape)
 		
@@ -170,9 +179,9 @@ class TextRender: WidapGLView {
 		shader.addUniform(uniform: tex, name: "tex")*/
 	}
 	
-	override func update() {
+	override func update(delta: Double) {
 		
-		cycle.val += 0.01
+		cycle.val += GLfloat(delta)*0.4
 		
 		cycle.val = cycle.val - floor(cycle.val)
 	}

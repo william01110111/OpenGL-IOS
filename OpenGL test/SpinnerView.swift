@@ -74,9 +74,9 @@ class SpinnerView: WidapGLView {
 		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
 	}
 	
-	override func update() {
+	override func update(delta: Double) {
 		
-		cycle.val += 0.01
+		cycle.val += GLfloat(delta)
 		
 		cycle.val = cycle.val - floor(cycle.val)
 	}

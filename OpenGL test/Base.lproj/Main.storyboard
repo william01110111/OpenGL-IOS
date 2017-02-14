@@ -29,6 +29,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="79y-vN-jmF" secondAttribute="height" multiplier="1:1" id="B3e-mr-hoN"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cycleIB">
+                                        <real key="value" value="12.1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

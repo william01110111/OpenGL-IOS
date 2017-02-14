@@ -81,11 +81,11 @@ class GLToVideo: WidapGLView {
 		setupCapture()
 	}
 	
-	override func update() {
+	override func update(delta: Double) {
 		
 		captureFrame()
 		
-		cycle.val += 0.01
+		cycle.val += GLfloat(delta)
 		
 		cycle.val = cycle.val - Float(Int(cycle.val))
 	}

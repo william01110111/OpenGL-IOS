@@ -17,11 +17,12 @@ class TextShape: WidapShape {
 	]
 	
 	static let vertShaderSrc = ""
+		+	"uniform highp mat4 transform;"
 		+	"attribute vec4 pos; "
 		+	"attribute vec2 uv; "
 		+	"varying lowp vec2 fragUV; "
 		+	"void main(void) { "
-		+		"gl_Position = pos; "
+		+		"gl_Position = transform * pos; "
 		+		"fragUV = uv; "
 		+	"} "
 	
@@ -31,15 +32,15 @@ class TextShape: WidapShape {
 		+	"precision lowp float; "
 		+	"void main(void) { "
 		+		"float val = texture2D(tex, fragUV).x; "
-		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val); "
+		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val/2.0+0.5); "
 		+	"}"
 	
 	static let vertices : [Vertex] = [
 		//		Position			UV
-		Vertex(	1.0, -1.0, 0,		1.0, 0.0),
+		Vertex(	1.0, 0.0, 0,		1.0, 0.0),
 		Vertex(	1.0,  1.0, 0,		1.0, 1.0),
-		Vertex(	-1.0,  1.0, 0,	0.0, 1.0),
-		Vertex(	-1.0, -1.0, 0,	0.0, 0.0)
+		Vertex(	-1.0,  1.0, 0,		0.0, 1.0),
+		Vertex(	-1.0, 0.0, 0,		0.0, 0.0)
 	]
 	
 	static let indices : [GLubyte] = [
@@ -48,6 +49,7 @@ class TextShape: WidapShape {
 	]
 	
 	var tex = UniformTex()
+	var transform = UniformMatrix4(GLKMatrix4Scale(GLKMatrix4Identity, 0.5, 0.5, 0.5))
 	
 	var text = "" {
 		didSet {
@@ -59,6 +61,7 @@ class TextShape: WidapShape {
 		let shader = ShaderProgram(vertAttribs: TextShape.VertexAttributes, vert: TextShape.vertShaderSrc, frag: TextShape.fragShaderSrc)
 		
 		shader.addUniform(uniform: tex, name: "tex")
+		shader.addUniform(uniform: transform, name: "transform")
 		
 		super.init(verts: TextShape.vertices, indices: TextShape.indices, shader: shader)
 	}
@@ -72,7 +75,7 @@ class TextShape: WidapShape {
 		layer.string = text
 		layer.foregroundColor = UIColor.white.cgColor
 		layer.backgroundColor = UIColor.black.cgColor
-		layer.fontSize = 20
+		layer.fontSize = 300
 		layer.isWrapped = false
 		
 		let preferredFrameSize = layer.preferredFrameSize()
