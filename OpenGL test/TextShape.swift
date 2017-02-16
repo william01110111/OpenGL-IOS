@@ -49,7 +49,7 @@ class TextShape: Shape {
 	]
 	
 	var tex = UniformTex()
-	var transform = UniformMatrix4(GLKMatrix4Scale(GLKMatrix4Identity, 0.5, 0.5, 0.5))
+	var transform0 = UniformMatrix4(GLKMatrix4Scale(GLKMatrix4Identity, 0.5, 0.5, 0.5))
 	
 	var text = "" {
 		didSet {
@@ -61,7 +61,7 @@ class TextShape: Shape {
 		let shader = ShaderProgram(vertAttribs: TextShape.VertexAttributes, vertShader: TextShape.vertShaderSrc, fragShader: TextShape.fragShaderSrc)
 		
 		shader.addUniform(uniform: tex, name: "tex")
-		shader.addUniform(uniform: transform, name: "transform")
+		shader.addUniform(uniform: transform0, name: "transform")
 		
 		super.init(verts: TextShape.vertices, indices: TextShape.indices, shader: shader)
 	}

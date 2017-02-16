@@ -38,6 +38,13 @@ class Shape: Drawable {
 	var indexBuffer: GLuint = 0
 	var indexCount = 0
 	var shader = ShaderProgram()
+	var transform = GLKMatrix4()
+	
+	var x: Double = 0			{didSet {transformNeedsUpdate = true}}
+	var y: Double = 0			{didSet {transformNeedsUpdate = true}}
+	var rotation: Double = 0	{didSet {transformNeedsUpdate = true}}
+	var scale: Double = 1		{didSet {transformNeedsUpdate = true}}
+	var transformNeedsUpdate = true
 	
 	init() {}
 	
@@ -52,29 +59,39 @@ class Shape: Drawable {
 		glGenBuffers(GLsizei(1), &vertexBuffer)
 		
 		glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
-			let count = verts.count
-			let size = MemoryLayout<ShapeVert>.size
-			glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, verts, GLenum(GL_STATIC_DRAW))
+		let count = verts.count
+		let size = MemoryLayout<ShapeVert>.size
+		glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, verts, GLenum(GL_STATIC_DRAW))
 		
 		glGenBuffers(GLsizei(1), &indexBuffer)
 		
 		glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
-			glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW))
-			indexCount = indices.count
+		glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW))
+		indexCount = indices.count
+	}
+	
+	func updateTransform() {
+		transform = GLKMatrix4Identity
+		transform = GLKMatrix4Scale(transform, Float(scale), Float(scale), Float(scale))
+		transform = GLKMatrix4RotateZ(transform, GLKMathDegreesToRadians(Float(rotation)))
+		transform = GLKMatrix4Translate(transform, Float(x), Float(y), 0)
 	}
 	
 	func draw() {
 		
+		if (transformNeedsUpdate) {
+			updateTransform()
+			transformNeedsUpdate = false
+		}
+		
 		shader.engage()
-		
-		//glUniform1f(glGetUniformLocation(shader.programHandle, "cycle"), GLfloat(cycle))
-		
 		glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
-		
 		glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
 		
 		glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indexCount), GLenum(GL_UNSIGNED_BYTE), nil)
 		
+		glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0)
+		//glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0) // this line breaks everything and I don't know why
 		shader.disengage()
 	}
 	
