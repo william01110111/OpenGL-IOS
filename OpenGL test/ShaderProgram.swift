@@ -12,7 +12,7 @@ import GLKit
 class ShaderProgram {
 	
 	var programHandle : GLuint = 0
-	var vertAttribs = [VertexAttribute]()
+	var vertAttribs = [VertAttrib]()
 	var uniforms = [UniformBase?]()
 	
 	init() {}
@@ -21,7 +21,7 @@ class ShaderProgram {
 		destroy()
 	}
 	
-	init(vertAttribs: [VertexAttribute], vertShader: String, fragShader: String) {
+	init(vertAttribs: [VertAttrib], vertShader: String, fragShader: String) {
 		let vertexShaderName = self.compileShader(src: vertShader, type: GLenum(GL_VERTEX_SHADER))
 		let fragmentShaderName = self.compileShader(src: fragShader, type: GLenum(GL_FRAGMENT_SHADER))
 		
@@ -117,7 +117,7 @@ class ShaderProgram {
 		}
 		
 		for i in vertAttribs {
-			glVertexAttribPointer(i.index, i.count, i.type, GLboolean(GL_FALSE), GLsizei(MemoryLayout<ShapeVertex>.size), i.offset)
+			glVertexAttribPointer(i.index, i.count, i.type, GLboolean(GL_FALSE), GLsizei(MemoryLayout<ShapeVert>.size), i.offset)
 			glEnableVertexAttribArray(i.index)
 		}
 	}

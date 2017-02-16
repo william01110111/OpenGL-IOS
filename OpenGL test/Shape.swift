@@ -9,7 +9,7 @@
 import Foundation
 import GLKit
 
-struct ShapeVertex {
+struct ShapeVert {
 	var x : GLfloat = 0.0
 	var y : GLfloat = 0.0
 	var z : GLfloat = 0.0
@@ -29,9 +29,9 @@ struct ShapeVertex {
 
 class Shape: Drawable {
 	
-	static let vertexAttrs: [VertexAttribute] = [
-		VertexAttribute(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
-		VertexAttribute(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
+	static let vertexAttrs: [VertAttrib] = [
+		VertAttrib(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
+		VertAttrib(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
 	]
 	
 	var vertexBuffer : GLuint = 0
@@ -45,7 +45,7 @@ class Shape: Drawable {
 		destroy()
 	}
 	
-	init(verts: [ShapeVertex], indices: [GLubyte], shader: ShaderProgram) {
+	init(verts: [ShapeVert], indices: [GLubyte], shader: ShaderProgram) {
 		
 		self.shader = shader
 		
@@ -53,7 +53,7 @@ class Shape: Drawable {
 		
 		glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
 			let count = verts.count
-			let size = MemoryLayout<ShapeVertex>.size
+			let size = MemoryLayout<ShapeVert>.size
 			glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, verts, GLenum(GL_STATIC_DRAW))
 		
 		glGenBuffers(GLsizei(1), &indexBuffer)

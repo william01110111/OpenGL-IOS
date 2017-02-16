@@ -54,10 +54,10 @@ class GLToVideo: WMGLView {
 		+		"} "
 		+	"}"
 	
-	let vertices : [ShapeVertex] = [
-		ShapeVertex( 0.0,  0.25, 0.0),    // TOP
-		ShapeVertex(-0.5, -0.25, 0.0),    // LEFT
-		ShapeVertex( 0.5, -0.25, 0.0),    // RIGHT
+	let vertices : [ShapeVert] = [
+		ShapeVert( 0.0,  0.25, 0.0),    // TOP
+		ShapeVert(-0.5, -0.25, 0.0),    // LEFT
+		ShapeVert( 0.5, -0.25, 0.0),    // RIGHT
 	]
 	
 	fileprivate var object = Shape()

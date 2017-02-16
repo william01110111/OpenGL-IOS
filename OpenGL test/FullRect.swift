@@ -11,12 +11,12 @@ import GLKit
 
 class FullRect: Shape {
 	
-	let vertices : [ShapeVertex] = [
+	let vertices : [ShapeVert] = [
 		//		Position			UV
-		ShapeVertex(	1.0, -1.0, 0.0,		1.0, 0.0),
-		ShapeVertex(	1.0,  1.0, 0.0,		1.0, 1.0),
-		ShapeVertex(	-1.0,  1.0, 0.0,	0.0, 1.0),
-		ShapeVertex(	-1.0, -1.0, 0.0,	0.0, 0.0)
+		ShapeVert(	1.0, -1.0, 0.0,		1.0, 0.0),
+		ShapeVert(	1.0,  1.0, 0.0,		1.0, 1.0),
+		ShapeVert(	-1.0,  1.0, 0.0,	0.0, 1.0),
+		ShapeVert(	-1.0, -1.0, 0.0,	0.0, 0.0)
 	]
 	
 	let indices : [GLubyte] = [

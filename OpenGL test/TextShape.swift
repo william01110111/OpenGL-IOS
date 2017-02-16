@@ -11,9 +11,9 @@ import GLKit
 
 class TextShape: Shape {
 	
-	static let VertexAttributes: [VertexAttribute] = [
-		VertexAttribute(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
-		VertexAttribute(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
+	static let VertexAttributes: [VertAttrib] = [
+		VertAttrib(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
+		VertAttrib(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
 	]
 	
 	static let vertShaderSrc = ""
@@ -35,12 +35,12 @@ class TextShape: Shape {
 		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val/2.0+0.5); "
 		+	"}"
 	
-	static let vertices : [ShapeVertex] = [
+	static let vertices : [ShapeVert] = [
 		//		Position			UV
-		ShapeVertex(	1.0, 0.0, 0,		1.0, 0.0),
-		ShapeVertex(	1.0,  1.0, 0,		1.0, 1.0),
-		ShapeVertex(	-1.0,  1.0, 0,		0.0, 1.0),
-		ShapeVertex(	-1.0, 0.0, 0,		0.0, 0.0)
+		ShapeVert(	1.0, 0.0, 0,		1.0, 0.0),
+		ShapeVert(	1.0,  1.0, 0,		1.0, 1.0),
+		ShapeVert(	-1.0,  1.0, 0,		0.0, 1.0),
+		ShapeVert(	-1.0, 0.0, 0,		0.0, 0.0)
 	]
 	
 	static let indices : [GLubyte] = [

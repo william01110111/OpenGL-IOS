@@ -16,7 +16,7 @@ enum VertexAttributes : GLuint {
 }
 */
 
-class VertexAttribute {
+class VertAttrib {
 	
 	var name: String
 	var index: GLuint
