@@ -10,7 +10,7 @@ import UIKit
 import GLKit
 
 @IBDesignable
-class TextRender: WidapGLView {
+class TextRender: WMGLView {
 	
 	let vertShaderSrc = ""
 		+	"attribute vec4 pos; "
@@ -57,7 +57,7 @@ class TextRender: WidapGLView {
 		ShapeVertex( 0.5, -0.25, 0.0),    // RIGHT
 	]
 	
-	fileprivate var object = WidapShape()
+	fileprivate var object = Shape()
 	
 	@IBInspectable var cycleIB: Double = 0.0 {
 		didSet {
@@ -72,7 +72,7 @@ class TextRender: WidapGLView {
 		
 		super.setup()
 		
-		let shader = ShaderProgram(vertAttribs: WidapShape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
 		
 		shader.addUniform(uniform: cycle, name: "cycle")
 		
@@ -86,7 +86,7 @@ class TextRender: WidapGLView {
 		
 		drawables.append(textShape)
 		
-		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
+		//object = Shape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
 		
 		//UIView *view = ... something ...;
 		

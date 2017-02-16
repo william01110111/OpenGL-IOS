@@ -9,7 +9,7 @@
 import Foundation
 import GLKit
 
-class FullRect: WidapShape {
+class FullRect: Shape {
 	
 	let vertices : [ShapeVertex] = [
 		//		Position			UV

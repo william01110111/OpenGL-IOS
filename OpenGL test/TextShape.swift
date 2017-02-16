@@ -9,7 +9,7 @@
 import UIKit
 import GLKit
 
-class TextShape: WidapShape {
+class TextShape: Shape {
 	
 	static let VertexAttributes: [VertexAttribute] = [
 		VertexAttribute(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),

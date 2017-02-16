@@ -1,5 +1,5 @@
 //
-//  WidapShape.swift
+//  Shape.swift
 //  OpenGL test
 //
 //  Created by William Wold on 1/31/17.
@@ -27,7 +27,7 @@ struct ShapeVertex {
 	}
 }
 
-class WidapShape: Drawable {
+class Shape: Drawable {
 	
 	static let vertexAttrs: [VertexAttribute] = [
 		VertexAttribute(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),

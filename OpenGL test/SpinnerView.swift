@@ -9,7 +9,7 @@
 import UIKit
 import GLKit
 
-class SpinnerView: WidapGLView {
+class SpinnerView: WMGLView {
 	
 	let vertShaderSrc = ""
 		+	"attribute vec4 pos; "
@@ -55,7 +55,7 @@ class SpinnerView: WidapGLView {
 		ShapeVertex( 0.5, -0.25, 0.0),    // RIGHT
 	]
 	
-	fileprivate var object = WidapShape()
+	fileprivate var object = Shape()
 	
 	var cycle = UniformFloat(0.0)
 	
@@ -63,7 +63,7 @@ class SpinnerView: WidapGLView {
 		
 		super.setup()
 		
-		let shader = ShaderProgram(vertAttribs: WidapShape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
 		
 		shader.addUniform(uniform: cycle, name: "cycle")
 		
@@ -71,7 +71,7 @@ class SpinnerView: WidapGLView {
 		
 		drawables.append(object)
 		
-		//object = WidapShape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
+		//object = Shape(verts: vertices, indices: [0, 1, 2], shader: ShaderProgram(vert: vertShaderSrc, frag: fragShaderSrc))
 	}
 	
 	override func update(delta: Double) {

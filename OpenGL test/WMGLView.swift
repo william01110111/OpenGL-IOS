@@ -10,7 +10,7 @@ import UIKit
 import GLKit
 
 @IBDesignable
-class WidapGLView: GLKView {
+class WMGLView: GLKView {
 	
 	var lastFrameTime: Double = 0
 	var displayLink: CADisplayLink!
