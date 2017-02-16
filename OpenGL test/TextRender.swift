@@ -51,10 +51,10 @@ class TextRender: WidapGLView {
 		+	"}"
 	
 	
-	let vertices : [Vertex] = [
-		Vertex( 0.0,  0.25, 0.0),    // TOP
-		Vertex(-0.5, -0.25, 0.0),    // LEFT
-		Vertex( 0.5, -0.25, 0.0),    // RIGHT
+	let vertices : [ShapeVertex] = [
+		ShapeVertex( 0.0,  0.25, 0.0),    // TOP
+		ShapeVertex(-0.5, -0.25, 0.0),    // LEFT
+		ShapeVertex( 0.5, -0.25, 0.0),    // RIGHT
 	]
 	
 	fileprivate var object = WidapShape()
@@ -72,7 +72,7 @@ class TextRender: WidapGLView {
 		
 		super.setup()
 		
-		let shader = ShaderProgram(vertAttribs: VertexAttributes, vert: vertShaderSrc, frag: spinnerFragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: WidapShape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
 		
 		shader.addUniform(uniform: cycle, name: "cycle")
 		

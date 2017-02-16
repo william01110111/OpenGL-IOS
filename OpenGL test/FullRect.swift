@@ -11,12 +11,12 @@ import GLKit
 
 class FullRect: WidapShape {
 	
-	let vertices : [Vertex] = [
+	let vertices : [ShapeVertex] = [
 		//		Position			UV
-		Vertex(	1.0, -1.0, 0.0,		1.0, 0.0),
-		Vertex(	1.0,  1.0, 0.0,		1.0, 1.0),
-		Vertex(	-1.0,  1.0, 0.0,	0.0, 1.0),
-		Vertex(	-1.0, -1.0, 0.0,	0.0, 0.0)
+		ShapeVertex(	1.0, -1.0, 0.0,		1.0, 0.0),
+		ShapeVertex(	1.0,  1.0, 0.0,		1.0, 1.0),
+		ShapeVertex(	-1.0,  1.0, 0.0,	0.0, 1.0),
+		ShapeVertex(	-1.0, -1.0, 0.0,	0.0, 0.0)
 	]
 	
 	let indices : [GLubyte] = [

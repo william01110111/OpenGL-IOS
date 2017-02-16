@@ -35,12 +35,12 @@ class TextShape: WidapShape {
 		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val/2.0+0.5); "
 		+	"}"
 	
-	static let vertices : [Vertex] = [
+	static let vertices : [ShapeVertex] = [
 		//		Position			UV
-		Vertex(	1.0, 0.0, 0,		1.0, 0.0),
-		Vertex(	1.0,  1.0, 0,		1.0, 1.0),
-		Vertex(	-1.0,  1.0, 0,		0.0, 1.0),
-		Vertex(	-1.0, 0.0, 0,		0.0, 0.0)
+		ShapeVertex(	1.0, 0.0, 0,		1.0, 0.0),
+		ShapeVertex(	1.0,  1.0, 0,		1.0, 1.0),
+		ShapeVertex(	-1.0,  1.0, 0,		0.0, 1.0),
+		ShapeVertex(	-1.0, 0.0, 0,		0.0, 0.0)
 	]
 	
 	static let indices : [GLubyte] = [
@@ -58,7 +58,7 @@ class TextShape: WidapShape {
 	}
 	
 	override init() {
-		let shader = ShaderProgram(vertAttribs: TextShape.VertexAttributes, vert: TextShape.vertShaderSrc, frag: TextShape.fragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: TextShape.VertexAttributes, vertShader: TextShape.vertShaderSrc, fragShader: TextShape.fragShaderSrc)
 		
 		shader.addUniform(uniform: tex, name: "tex")
 		shader.addUniform(uniform: transform, name: "transform")
@@ -185,5 +185,11 @@ class TextShape: WidapShape {
 		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_LUMINANCE_ALPHA, GLsizei(width), GLsizei(height), 0, GLenum(GL_LUMINANCE_ALPHA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
 		free(pixelBuffer);
+	}
+	
+	//returns a vertex array
+	private func getVerts(w: Double, h: Double) {
+		
+		
 	}
 }

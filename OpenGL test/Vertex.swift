@@ -16,11 +16,6 @@ enum VertexAttributes : GLuint {
 }
 */
 
-let VertexAttributes: [VertexAttribute] = [
-	VertexAttribute(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
-	VertexAttribute(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
-]
-
 class VertexAttribute {
 	
 	var name: String
@@ -36,23 +31,5 @@ class VertexAttribute {
 		self.type = type
 		self.count = count
 		self.offset = UnsafeRawPointer(bitPattern: offset)
-	}
-}
-
-struct Vertex {
-	var x : GLfloat = 0.0
-	var y : GLfloat = 0.0
-	var z : GLfloat = 0.0
-	
-	var u : GLfloat = 0.0
-	var v : GLfloat = 0.0
-	
-	init(_ x : GLfloat, _ y : GLfloat, _ z : GLfloat, _ u : GLfloat = 0.0, _ v : GLfloat = 0.0) {
-		self.x = x
-		self.y = y
-		self.z = z
-		
-		self.u = u
-		self.v = v
 	}
 }

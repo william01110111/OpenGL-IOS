@@ -12,6 +12,7 @@ import GLKit
 class ShaderProgram {
 	
 	var programHandle : GLuint = 0
+	var vertAttribs = [VertexAttribute]()
 	var uniforms = [UniformBase?]()
 	
 	init() {}
@@ -20,9 +21,11 @@ class ShaderProgram {
 		destroy()
 	}
 	
-	init(vertAttribs: [VertexAttribute], vert: String, frag: String) {
-		let vertexShaderName = self.compileShader(src: vert, type: GLenum(GL_VERTEX_SHADER))
-		let fragmentShaderName = self.compileShader(src: frag, type: GLenum(GL_FRAGMENT_SHADER))
+	init(vertAttribs: [VertexAttribute], vertShader: String, fragShader: String) {
+		let vertexShaderName = self.compileShader(src: vertShader, type: GLenum(GL_VERTEX_SHADER))
+		let fragmentShaderName = self.compileShader(src: fragShader, type: GLenum(GL_FRAGMENT_SHADER))
+		
+		self.vertAttribs = vertAttribs
 		
 		self.programHandle = glCreateProgram()
 		glAttachShader(self.programHandle, vertexShaderName)
@@ -104,7 +107,7 @@ class ShaderProgram {
 		uniforms[Int(loc)] = uniform
 	}
 	
-	func use() {
+	func engage() {
 		
 		glUseProgram(programHandle)
 		
@@ -112,6 +115,20 @@ class ShaderProgram {
 			uniforms[i]?.apply(loc: GLint(i))
 			i+=1
 		}
+		
+		for i in vertAttribs {
+			glVertexAttribPointer(i.index, i.count, i.type, GLboolean(GL_FALSE), GLsizei(MemoryLayout<ShapeVertex>.size), i.offset)
+			glEnableVertexAttribArray(i.index)
+		}
+	}
+	
+	func disengage() {
+		
+		for i in vertAttribs {
+			glDisableVertexAttribArray(i.index)
+		}
+		
+		glUseProgram(0)
 	}
 	
 	func destroy() {
