@@ -72,6 +72,7 @@ class TextShape: Shape {
 		layer.string = text
 		layer.foregroundColor = UIColor.white.cgColor
 		layer.backgroundColor = UIColor.black.cgColor
+		layer.alignmentMode = kCAAlignmentCenter
 		layer.fontSize = 300
 		layer.isWrapped = false
 		

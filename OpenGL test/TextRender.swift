@@ -66,17 +66,17 @@ class TextRender: WMGLView {
 		
 		super.setup()
 		
-		//let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
 		
-		//shader.addUniform(uniform: cycle, name: "cycle")
+		shader.addUniform(uniform: cycle, name: "cycle")
 		
-		//object = FullRect(shader: shader)
+		object = FullRect(shader: shader)
 		
-		//drawables.append(object)
+		drawables.append(object)
 		
 		let textShape = TextShape()
 		
-		textShape.text = "William is the greatest\nperson alive"
+		textShape.text = "iejglf sfdads dsfa sdakljsd\nsdfsl sdds"
 		
 		drawables.append(textShape)
 		
