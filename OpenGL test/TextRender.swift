@@ -51,12 +51,6 @@ class TextRender: WMGLView {
 		+	"}"
 	
 	
-	let vertices : [ShapeVert] = [
-		ShapeVert( 0.0,  0.25, 0.0),    // TOP
-		ShapeVert(-0.5, -0.25, 0.0),    // LEFT
-		ShapeVert( 0.5, -0.25, 0.0),    // RIGHT
-	]
-	
 	fileprivate var object = Shape()
 	
 	@IBInspectable var cycleIB: Double = 0.0 {
@@ -72,17 +66,17 @@ class TextRender: WMGLView {
 		
 		super.setup()
 		
-		let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
+		//let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: vertShaderSrc, fragShader: spinnerFragShaderSrc)
 		
-		shader.addUniform(uniform: cycle, name: "cycle")
+		//shader.addUniform(uniform: cycle, name: "cycle")
 		
-		object = FullRect(shader: shader)
+		//object = FullRect(shader: shader)
 		
-		drawables.append(object)
+		//drawables.append(object)
 		
 		let textShape = TextShape()
 		
-		textShape.text = "William"
+		textShape.text = "William is the greatest\nperson alive"
 		
 		drawables.append(textShape)
 		

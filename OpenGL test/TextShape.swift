@@ -11,11 +11,6 @@ import GLKit
 
 class TextShape: Shape {
 	
-	static let VertexAttributes: [VertAttrib] = [
-		VertAttrib(name: "pos", index: 0, type: GLenum(GL_FLOAT), count: 3, offset: 0),
-		VertAttrib(name: "uv", index: 1, type: GLenum(GL_FLOAT), count: 2, offset: 3 * MemoryLayout<GLfloat>.size)
-	]
-	
 	static let vertShaderSrc = ""
 		+	"uniform highp mat4 transform;"
 		+	"attribute vec4 pos; "
@@ -35,6 +30,7 @@ class TextShape: Shape {
 		+		"gl_FragColor = vec4(1.0, 1.0, 1.0, val/2.0+0.5); "
 		+	"}"
 	
+	/*
 	static let vertices : [ShapeVert] = [
 		//		Position			UV
 		ShapeVert(	1.0, 0.0, 0,		1.0, 0.0),
@@ -42,14 +38,15 @@ class TextShape: Shape {
 		ShapeVert(	-1.0,  1.0, 0,		0.0, 1.0),
 		ShapeVert(	-1.0, 0.0, 0,		0.0, 0.0)
 	]
-	
+	*/
+
 	static let indices : [GLubyte] = [
 		0, 1, 2,
 		2, 3, 0
 	]
 	
 	var tex = UniformTex()
-	var transform0 = UniformMatrix4(GLKMatrix4Scale(GLKMatrix4Identity, 0.5, 0.5, 0.5))
+	var transform0 = UniformMatrix4(GLKMatrix4Scale(GLKMatrix4Identity, 1, 1, 1))
 	
 	var text = "" {
 		didSet {
@@ -58,12 +55,12 @@ class TextShape: Shape {
 	}
 	
 	override init() {
-		let shader = ShaderProgram(vertAttribs: TextShape.VertexAttributes, vertShader: TextShape.vertShaderSrc, fragShader: TextShape.fragShaderSrc)
+		let shader = ShaderProgram(vertAttribs: Shape.vertexAttrs, vertShader: TextShape.vertShaderSrc, fragShader: TextShape.fragShaderSrc)
 		
 		shader.addUniform(uniform: tex, name: "tex")
 		shader.addUniform(uniform: transform0, name: "transform")
 		
-		super.init(verts: TextShape.vertices, indices: TextShape.indices, shader: shader)
+		super.init(shader: shader)
 	}
 	
 	func updateText() {
@@ -185,11 +182,21 @@ class TextShape: Shape {
 		glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_LUMINANCE_ALPHA, GLsizei(width), GLsizei(height), 0, GLenum(GL_LUMINANCE_ALPHA), GLenum(GL_UNSIGNED_BYTE), pixelBuffer);
 		
 		free(pixelBuffer);
+		
+		setVerts(verts: getVerts(w: Double(width), h: Double(height)), indices: TextShape.indices)
 	}
 	
 	//returns a vertex array
-	private func getVerts(w: Double, h: Double) {
+	private func getVerts(w: Double, h: Double) -> [ShapeVert] {
 		
+		let hr = GLfloat(h/(w==0 ? 1 : w))
 		
+		return [
+			//		Position				UV
+			ShapeVert(	1.0, -hr, 0,		1.0, 0.0),
+			ShapeVert(	1.0, hr, 0,			1.0, 1.0),
+			ShapeVert(	-1.0, hr, 0,		0.0, 1.0),
+			ShapeVert(	-1.0, -hr, 0,		0.0, 0.0)
+		]
 	}
 }

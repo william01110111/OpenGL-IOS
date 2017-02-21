@@ -24,7 +24,7 @@ class FullRect: Shape {
 		2, 3, 0
 	]
 	
-	init(shader: ShaderProgram) {
+	override init(shader: ShaderProgram) {
 		
 		super.init(verts: vertices, indices: indices, shader: shader)
 	}

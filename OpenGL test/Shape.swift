@@ -54,7 +54,19 @@ class Shape: Drawable {
 	
 	init(verts: [ShapeVert], indices: [GLubyte], shader: ShaderProgram) {
 		
+		setVerts(verts: verts, indices: indices)
+		
 		self.shader = shader
+	}
+	
+	init(shader: ShaderProgram) {
+		
+		self.shader = shader
+	}
+	
+	func setVerts(verts: [ShapeVert], indices: [GLubyte]) {
+		
+		deleteVerts()
 		
 		glGenBuffers(GLsizei(1), &vertexBuffer)
 		
@@ -95,8 +107,7 @@ class Shape: Drawable {
 		shader.disengage()
 	}
 	
-	func destroy() {
-		
+	func deleteVerts() {
 		if vertexBuffer > 0 {
 			glDeleteBuffers(GLsizei(1), &vertexBuffer)
 			vertexBuffer = 0
@@ -108,6 +119,11 @@ class Shape: Drawable {
 		}
 		
 		indexCount = 0
+	}
+	
+	func destroy() {
+		
+		deleteVerts()
 		
 		shader.destroy()
 	}
