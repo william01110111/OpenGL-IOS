@@ -60,7 +60,7 @@ class WMGLView: GLKView {
 	
 	override func draw(_ rect: CGRect) {
 		
-		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClearColor(0.0, 0.0, 0.0, 0.0);
 		glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 		
 		for i in drawables {

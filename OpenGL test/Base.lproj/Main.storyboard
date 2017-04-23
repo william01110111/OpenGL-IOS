@@ -23,9 +23,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79y-vN-jmF" customClass="TextRender" customModule="OpenGL_test" customModuleProvider="target">
-                                <rect key="frame" x="31" y="177" width="313" height="313"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79y-vN-jmF" customClass="SpinnerView" customModule="OpenGL_test" customModuleProvider="target">
+                                <rect key="frame" x="131" y="302" width="112" height="158"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="79y-vN-jmF" secondAttribute="height" multiplier="1:1" id="B3e-mr-hoN"/>
                                 </constraints>
@@ -36,7 +36,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.4049530382" green="1" blue="0.30092989310000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="79y-vN-jmF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0a5-6M-jLN"/>
                             <constraint firstItem="79y-vN-jmF" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-15" id="3N2-2f-DfI"/>

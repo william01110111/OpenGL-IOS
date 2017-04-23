@@ -38,10 +38,10 @@ class SpinnerView: WMGLView {
 		+		"float dstSq = fragUV.x*fragUV.x+fragUV.y*fragUV.y; "
 		+		"if (dstSq<0.9*0.9 && dstSq>0.7*0.7) { "
 		//+			"float cycle = 0.33; "
-		+			"float ang = degrees(atan(fragUV.y, fragUV.x))/360.0; "
-		+			"gl_FragColor.r=1.0-mod(ang-cycle*1.0+0.5, 1.0); "
-		+			"gl_FragColor.g=1.0-mod(ang-cycle*2.0, 1.0); "
-		+			"gl_FragColor.b=1.0-mod(ang-cycle*3.0, 1.0); "
+		//+			"float ang = degrees(atan(fragUV.y, fragUV.x))/360.0; "
+		//+			"gl_FragColor.r=1.0-mod(ang-cycle*1.0+0.5, 1.0); "
+		//+			"gl_FragColor.g=1.0-mod(ang-cycle*2.0, 1.0); "
+		//+			"gl_FragColor.b=1.0-mod(ang-cycle*3.0, 1.0); "
 		+			"gl_FragColor.a = 1.0; "
 		+		"} "
 		+		"else { "
@@ -76,7 +76,7 @@ class SpinnerView: WMGLView {
 	
 	override func update(delta: Double) {
 		
-		cycle.val += GLfloat(delta)
+		cycle.val += GLfloat(delta*0.5)
 		
 		cycle.val = cycle.val - floor(cycle.val)
 	}
